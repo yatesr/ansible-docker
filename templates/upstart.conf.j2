@@ -1,0 +1,7 @@
+description "{{docker_container_name}} container"
+start on filesystem and started docker
+stop on runlevel [!2345]
+respawn
+script
+  /usr/bin/docker start -a {{docker_container_name}}
+end script

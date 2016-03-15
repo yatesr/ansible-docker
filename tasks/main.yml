@@ -1,0 +1,61 @@
+---
+#- name: Setup host volumes
+#  file:
+    
+
+- name: Start docker container
+  docker:
+    name: "{{item.key}}"
+    cap_add: "{{item.value.cap_add | default([])}}" 
+    cap_drop: "{{item.value.cap_drop | default([])}}" 
+    command: "{{item.value.command | default()}}" 
+    count: "{{item.value.count | default(1)}}" 
+    cpu_set: "{{item.value.cpu_set | default()}}" 
+#    cpu_shares: "{{item.value.cpu_shares | default()}}" 
+    detach: "{{item.value.detach | default(True)}}" 
+#    devices: "{{item.value.devices | default({})}}" 
+#    dns: "{{item.value.dns | default(None)}}" 
+#    docker_api_version: "{{item.value.docker_api_version | default({})}}" 
+#    docker_url: "{{item.value.docker_url | default({})}}" 
+#    docker_user: "{{item.value.docker_user | default({})}}" 
+#    domainname: "{{item.value.domainname | default({})}}" 
+#    email: "{{item.value.email | default({})}}" 
+#    entrypoint: "{{item.value.entrypoint | default({})}}" 
+    env: "{{item.value.env | default({})}}" 
+    expose: "{{item.value.expose | default()}}" 
+    extra_hosts: "{{item.value.extra_hosts | default({})}}" 
+    hostname: "{{item.value.hostname | default({})}}" 
+    image: "{{item.value.image}}" 
+#    insecure_registry: "{{item.value.insecure_registry | default()}}" 
+#    labels: "{{item.value.labels | default()}}" 
+    links: "{{item.value.links | default([])}}" 
+    log_driver: "{{item.value.log_driver | default('json-file')}}" 
+    log_opt: "{{item.value.log_opt | default({})}}" 
+#    lxc_conf: "{{item.value.lxc_conf | default()}}" 
+#    memory_limit: "{{item.value.memory_limit | default(0)}}" 
+    net: "{{item.value.net | default()}}" 
+#    password: "{{item.value.password | default({})}}" 
+    pid: "{{item.value.pid | default('host')}}" 
+    privileged: "{{item.value.privileged | default('no')}}" 
+    publish_all_ports: "{{item.value.publish_all_ports | default('false')}}" 
+    pull: "{{item.value.pull | default('missing')}}" 
+    ports: "{{item.value.ports | default([])}}" 
+    read_only: "{{item.value.read_only | default(False)}}" 
+#    registry: "{{item.value.registry | default({})}}" 
+    restart_policy: "{{item.value.restart_policy | default('no')}}" 
+    restart_policy_retry: "{{item.value.restart_policy_retry | default(0)}}" 
+    signal: "{{item.value.signal | default({})}}" 
+    state: "{{item.value.state | default('started')}}" 
+    stdin_open: "{{item.value.stdin_open | default(False)}}" 
+    stop_timeout: "{{item.value.stop_timeout | default(10)}}" 
+#    timeout: "{{item.value.timeout | default(60)}}" 
+    tty: "{{item.value.tty | default(False)}}" 
+#    use_tls: "{{item.value.use_tls | default('verify')}}" 
+#    username: "{{item.value.username | default({})}}" 
+    volumes: "{{item.value.volumes | default([])}}" 
+    volumes_from: "{{item.value.volumes_from | default([])}}" 
+  with_dict: '{{docker_containers | default({})}}'
+  become: yes
+#  notify:
+#   - Insert service
+#   - Enable service
